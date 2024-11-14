@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game Shelf</title>
+    <meta charset="UTF-8" />  
+    <link rel="icon" href="">
+  </head>
+  <style>
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: none;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+      box-shadow: inset 0px 0px 3px 2px rgba(255, 255, 255, 1);
+    }
+    body{
+      background: rgb(0, 0, 0);
+      margin: 0px;
+      padding: 0px;
+      image-rendering: high-quality;
+    }
+    #shelf{
+      background: url("https://i.redd.it/wrtf7srhd3b71.png");/*https://25.media.tumblr.com/363fded6d6148383b21218d0e8e415b8/tumblr_mpvsyv0cK81r2geqjo1_500.gif*/
+      background-attachment: fixed;
+      background-size: cover;
+      margin: 0px;
+      padding: 5px;
+      border-radius: 10px;
+      box-shadow: inset 0px 0px 5px 5px rgba(0, 0, 0, 0.5), 0px 0px 10px 10px rgb(255, 255, 255);
+      width: 810px;
+      height: 90vh;
+      max-width: 100vW;
+      max-height: 100vh;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      overflow: auto;
+    }
+    .game_img{
+      background: rgb(255, 255, 255);
+      border-top: solid rgb(255, 255, 255) 1px;
+      border-left: solid rgb(255, 255, 255) 2px;
+      border-bottom: solid rgb(0, 0, 0) 1px;
+      border-right: solid rgb(0, 0, 0) 2px;
+      border-radius: 5px;
+      max-height: 250px;
+      max-width: 175px;
+      margin: 10px;
+      animation-duration: 0.2s;
+      animation-name: shrink;
+      animation-timing-function: ease-in-out;
+      box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+    }
+    .game_img:hover{
+      transform: scale(1.2);
+      box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+      animation-duration: 0.2s;
+      animation-name: grow;
+      animation-timing-function: ease-in-out;
+    }
+    @keyframes grow{
+      from {
+        transform: scale(1);
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+      }
+      to {
+        transform: scale(1.2);
+        box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+      }
+    }
+    @keyframes shrink{
+      from {
+        transform: scale(1.2);
+        box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+      }
+      to {
+        transform: scale(1);
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+      }
+    }
+  </style>
+  <body>
+    <div id="shelf">
+      <center>
+        <div id="game_list"></div>
+      </center>
+    </div>
+    <script>
+      var games = {
+        "A": {
+            "name": "New Super Mario Bros. U",
+            "console": "Wii U",
+            "genre": "Super Mario",
+            "about": "Join Mario, Luigi, and pals for single-player or multiplayer fun anytime, anywhere! Take on a family-friendly, side-scrolling adventure with up to three friends as you try to save the Mushroom Kingdom.",
+            "date": "11/18/2012",
+            "art": "Images/1.jpg"
+        },
+        "B": {
+            "name": "Lego City Undercover",
+            "console": "Wii U",
+            "genre": "LEGO",
+            "about": "Join the Chase! In LEGO® CITY Undercover, play as Chase McCain, a police officer who's been tasked with going undercover to hunt down the notorious — and recently escaped — criminal Rex Fury and putting an end to his city-wide crime wave.",
+            "date": "3/18/2013",
+            "art": "Images/2.jpg"
+        },
+        "C": {
+            "name": "Captain Toad: Treasure Tracker",
+            "console": "Wii U",
+            "genre": "Super Mario",
+            "about": "",
+            "date": "",
+            "art": "Images/3.jpg"
+        },
+        "D": {
+            "name": "Super Mario Maker",
+            "console": "Wii U",
+            "genre": "Super Mario",
+            "about": "",
+            "date": "",
+            "art": "Images/4.jpg"
+        },
+        "E": {
+            "name": "LEGO Marvel Super Heroes",
+            "console": "Wii U",
+            "genre": "LEGO",
+            "about": "",
+            "date": "10/22/2013",
+            "art": "Images/5.jpg"
+        },
+        "F": {
+            "name": "LEGO Marvel Avengers",
+            "console": "Wii U",
+            "genre": "LEGO",
+            "about": "",
+            "date": "1/26/2016",
+            "art": "Images/8.jpg"
+        },
+        "G": {
+            "name": "Nintendo Land",
+            "console": "Wii U",
+            "genre": "Nintendo",
+            "about": "",
+            "date": "",
+            "art": "Images/12.jpg"
+        },
+        "H": {
+            "name": "NES Remix Pack",
+            "console": "Wii U",
+            "genre": "NES",
+            "about": "",
+            "date": "",
+            "art": "Images/13.jpg"
+        },
+        "I": {
+            "name": "LEGO Jurassic World",
+            "console": "Wii U",
+            "genre": "LEGO",
+            "about": "",
+            "date": "",
+            "art": "Images/9.jpg"
+        },
+        "J": {
+            "name": "Super Mario 3D World",
+            "console": "Wii U",
+            "genre": "Super Mario",
+            "about": "",
+            "date": "",
+            "art": "Images/10.jpg"
+        },
+        "K": {
+            "name": "Mario Kart 8",
+            "console": "Wii U",
+            "genre": "Super Mario",
+            "about": "",
+            "date": "",
+            "art": "Images/11.jpg"
+        },
+        "L": {
+            "name": "LEGO Worlds",
+            "console": "Steam",
+            "genre": "LEGO",
+            "about": "",
+            "date": "",
+            "art": "Images/6.jpg"
+        },
+        "M": {
+            "name": "LEGO Marvel Super Heroes 2",
+            "console": "Steam",
+            "genre": "LEGO",
+            "about": "",
+            "date": "11/14/2017",
+            "art": "Images/7.jpg"
+        }
+      }
+      var GameList = document.getElementById("game_list");
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.A.name+"\nConsole: "+games.A.console+"\nGenre: "+games.A.genre+"\nDate: "+games.A.date+"' class='game_img' src='"+games.A.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.B.name+"\nConsole: "+games.B.console+"\nGenre: "+games.B.genre+"\nDate: "+games.B.date+"' class='game_img' src='"+games.B.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.C.name+"\nConsole: "+games.C.console+"\nGenre: "+games.C.genre+"\nDate: "+games.C.date+"' class='game_img' src='"+games.C.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.D.name+"\nConsole: "+games.D.console+"\nGenre: "+games.D.genre+"\nDate: "+games.D.date+"' class='game_img' src='"+games.D.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.E.name+"\nConsole: "+games.E.console+"\nGenre: "+games.E.genre+"\nDate: "+games.E.date+"' class='game_img' src='"+games.E.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.F.name+"\nConsole: "+games.F.console+"\nGenre: "+games.F.genre+"\nDate: "+games.F.date+"' class='game_img' src='"+games.F.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.G.name+"\nConsole: "+games.G.console+"\nGenre: "+games.G.genre+"\nDate: "+games.G.date+"' class='game_img' src='"+games.G.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.H.name+"\nConsole: "+games.H.console+"\nGenre: "+games.H.genre+"\nDate: "+games.H.date+"' class='game_img' src='"+games.H.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.I.name+"\nConsole: "+games.I.console+"\nGenre: "+games.I.genre+"\nDate: "+games.I.date+"' class='game_img' src='"+games.I.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.J.name+"\nConsole: "+games.J.console+"\nGenre: "+games.J.genre+"\nDate: "+games.J.date+"' class='game_img' src='"+games.J.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.K.name+"\nConsole: "+games.K.console+"\nGenre: "+games.K.genre+"\nDate: "+games.K.date+"' class='game_img' src='"+games.K.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.L.name+"\nConsole: "+games.L.console+"\nGenre: "+games.L.genre+"\nDate: "+games.L.date+"' class='game_img' src='"+games.L.art+"'>";
+      GameList.innerHTML = GameList.innerHTML + "<img draggable='false' title='Name: "+games.M.name+"\nConsole: "+games.M.console+"\nGenre: "+games.M.genre+"\nDate: "+games.M.date+"' class='game_img' src='"+games.M.art+"'>";
+    </script>
+  </body>
+</html>
